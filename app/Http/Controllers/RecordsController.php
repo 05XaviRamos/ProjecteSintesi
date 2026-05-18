@@ -40,6 +40,7 @@ class RecordsController extends Controller
             'movement' => 'required|in:input,output'
         ]);
         $user = $request->user();
+        $user->records()->create($request);
         return redirect()->route('records.index')->with('success', 'Record created successfully');
     }
 
