@@ -11,6 +11,8 @@ class Zones extends Model
     /** @use HasFactory<\Database\Factories\ZonesFactory> */
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     public function records() {
         return $this->hasMany(Records::class);
     }

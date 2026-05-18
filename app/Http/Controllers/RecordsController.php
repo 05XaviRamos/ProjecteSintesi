@@ -12,7 +12,9 @@ class RecordsController extends Controller
      */
     public function index()
     {
-        //
+        //canviar index per vista de llistat de records
+        $records = Records::latest();
+        return view('index', ['records' => $records]);
     }
 
     /**
@@ -20,7 +22,8 @@ class RecordsController extends Controller
      */
     public function create()
     {
-        //
+        //canviar create per vista de creació de records
+        return view('create');
     }
 
     /**
@@ -29,6 +32,15 @@ class RecordsController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'zone_id' => 'required|exists:zones,id',
+            'container_id' => 'required|exists:containers,id',
+            'material_id' => 'required|exists:materials,id',
+            'weight' => 'required|numeric',
+            'movement' => 'required|in:input,output'
+        ]);
+        $user = $request->user();
+        return redirect()->route('records.index')->with('success', 'Record created successfully');
     }
 
     /**
@@ -44,7 +56,8 @@ class RecordsController extends Controller
      */
     public function edit(Records $records)
     {
-        //
+        // canviar edit per vista d'editar records
+        //return view('edit', ['record' => $records]);
     }
 
     /**

@@ -10,6 +10,8 @@ class Materials extends Model
     /** @use HasFactory<\Database\Factories\MaterialsFactory> */
     use HasFactory;
 
+    protected $fillable = ['name', 'input', 'output'];
+
     public function records() {
         return $this->hasMany(Records::class);
     }

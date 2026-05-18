@@ -12,7 +12,9 @@ class ContainersController extends Controller
      */
     public function index()
     {
-        //
+        // index s'ha de canviar a la vista on hi hagi el llistat de l'admin
+        $containers = Containers::latest();
+        return view('index', ['containers' => $containers]);
     }
 
     /**
@@ -20,7 +22,8 @@ class ContainersController extends Controller
      */
     public function create()
     {
-        //
+        // create s'ha de canviar a la vista de creació de containers
+        return view('create');
     }
 
     /**
@@ -29,6 +32,12 @@ class ContainersController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'weight' => 'required'
+        ]);
+        Containers::create($request->all());
+        return redirect()->route('containers.index')->with('success', 'Nou contenidor afegit correctament');
     }
 
     /**
@@ -44,7 +53,8 @@ class ContainersController extends Controller
      */
     public function edit(Containers $containers)
     {
-        //
+        // edit s'ha de canviar a la vista de editar containers
+        return view('edit', ['container' => $containers]);
     }
 
     /**
@@ -53,6 +63,12 @@ class ContainersController extends Controller
     public function update(Request $request, Containers $containers)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'weight' => 'required'
+        ]);
+        $containers->update($request->all());
+        return redirect()->route('containers.index')->with('success', 'Contenidor modificat correctament');
     }
 
     /**
@@ -61,5 +77,7 @@ class ContainersController extends Controller
     public function destroy(Containers $containers)
     {
         //
+        $containers->delete();
+        return redirect()->route('containers.index')->with('success', 'Contenidor eliminat correctament');
     }
 }

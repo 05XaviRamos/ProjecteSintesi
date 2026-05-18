@@ -12,7 +12,9 @@ class MaterialsController extends Controller
      */
     public function index()
     {
-        //
+        // canviar index per nom de vista de llistar materials de l'admin
+        $materials = Materials::latest();
+        return view('index', ['materials' => $materials]);
     }
 
     /**
@@ -20,7 +22,8 @@ class MaterialsController extends Controller
      */
     public function create()
     {
-        //
+        // canviar create per vista de crear materials
+        return view('create');
     }
 
     /**
@@ -29,6 +32,11 @@ class MaterialsController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required'
+        ]);
+        Materials::create($request->all());
+        return redirect()->route('materials.index')->with('success', 'Nou material afegit correctament');
     }
 
     /**
@@ -44,7 +52,8 @@ class MaterialsController extends Controller
      */
     public function edit(Materials $materials)
     {
-        //
+        //canviar edit per vista de editar material
+        return view('edit', ['material' => $materials]);
     }
 
     /**
@@ -53,6 +62,11 @@ class MaterialsController extends Controller
     public function update(Request $request, Materials $materials)
     {
         //
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $materials->update($request->all());
+        return redirect()->route('materials.index')->with('success', 'Material modificat correctament');
     }
 
     /**
@@ -61,5 +75,7 @@ class MaterialsController extends Controller
     public function destroy(Materials $materials)
     {
         //
+        $materials->delete();
+        return redirect()->route('materials.index')->with('success', 'Material eliminat correctament');
     }
 }

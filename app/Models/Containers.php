@@ -10,6 +10,8 @@ class Containers extends Model
     /** @use HasFactory<\Database\Factories\ContainersFactory> */
     use HasFactory;
 
+    protected $fillable = ['name', 'weight', 'input', 'output'];
+
     public function records() {
         return $this->hasMany(Records::class);
     }

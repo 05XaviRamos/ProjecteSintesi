@@ -10,19 +10,21 @@ class Records extends Model
     /** @use HasFactory<\Database\Factories\RecordsFactory> */
     use HasFactory;
 
-    public function users() {
+    protected $fillable = ['zone_id', 'container_id', 'material_id', 'weight', 'movement'];
+
+    public function user() {
         return $this->belongsTo(User::class);
     }
 
-    public function zones() {
+    public function zone() {
         return $this->belongsTo(Zones::class);
     }
 
-    public function containers() {
+    public function container() {
         return $this->belongsTo(Containers::class);
     }
 
-    public function materials() {
+    public function material() {
         return $this->belongsTo(Materials::class);
     }
 }
