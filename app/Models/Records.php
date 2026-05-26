@@ -10,7 +10,17 @@ class Records extends Model
     /** @use HasFactory<\Database\Factories\RecordsFactory> */
     use HasFactory;
 
-    protected $fillable = ['zone_id', 'container_id', 'material_id', 'weight', 'movement'];
+    protected $fillable = ['user_id', 'zone_id', 'container_id', 'material_id', 'weight', 'wight', 'movement'];
+
+    public function setWeightAttribute($value): void
+    {
+        $this->attributes['wight'] = $value;
+    }
+
+    public function getWeightAttribute(): mixed
+    {
+        return $this->attributes['wight'] ?? null;
+    }
 
     public function user() {
         return $this->belongsTo(User::class);

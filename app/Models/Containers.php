@@ -17,6 +17,6 @@ class Containers extends Model
     }
 
     public function zones() {
-        return $this->belongsToMany(Zones::class);
+        return $this->belongsToMany(Zones::class, 'zones__containers', 'container_id', 'zone_id');
     }
 }

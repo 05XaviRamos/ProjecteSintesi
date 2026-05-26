@@ -2,7 +2,7 @@
     <div class="w-full">
 
         <!-- Title -->
-         <div class="flex justify-center mb-4">
+        <div class="flex justify-center mb-4">
             <img
                 src="{{ asset('logo_electroreciclying.png') }}"
                 alt="ElectroReciclying Logo"
@@ -21,29 +21,29 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <!-- Email -->
+            <!-- Name -->
             <div class="mt-4">
-                <x-input-label for="email" :value="__('Correu electrònic')" class="text-lg font-semibold text-gray-700" />
+                <x-input-label for="name" :value="__('Nom')" class="text-xl font-bold text-gray-700" />
                 <x-text-input
-                    id="email"
-                    class="block mt-3 w-full text-base py-3 px-4"
-                    type="email"
-                    name="email"
-                    :value="old('email')"
+                    id="name"
+                    class="block mt-3 w-full text-lg py-4 px-5"
+                    type="text"
+                    name="name"
+                    :value="old('name')"
                     required
                     autofocus
                     autocomplete="username"
                 />
-                <x-input-error :messages="$errors->get('email')" class="mt-3 text-sm" />
+                <x-input-error :messages="$errors->get('name')" class="mt-3 text-sm" />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
-                <x-input-label for="password" :value="__('Contrasenya')" class="text-lg font-semibold text-gray-700" />
+                <x-input-label for="password" :value="__('Contrasenya')" class="text-xl font-bold text-gray-700" />
 
                 <x-text-input
                     id="password"
-                    class="block mt-3 w-full text-base py-3 px-4"
+                    class="block mt-3 w-full text-lg py-4 px-5"
                     type="password"
                     name="password"
                     required
@@ -53,26 +53,9 @@
                 <x-input-error :messages="$errors->get('password')" class="mt-3 text-sm" />
             </div>
 
-            <!-- Remember + Forgot -->
-            <div class="mt-4 flex items-center justify-between gap-4">
-                <label for="remember_me" class="inline-flex items-center gap-3 text-base text-gray-600 cursor-pointer">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                    <span>Recorda'm</span>
-                </label>
-
-                @if (Route::has('password.request'))
-                    <a
-                        class="rounded-md text-base text-indigo-600 underline hover:text-indigo-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        href="{{ route('password.request') }}"
-                    >
-                        Has oblidat la contrasenya?
-                    </a>
-                @endif
-            </div>
-
             <!-- Button -->
             <div class="mt-6">
-                <x-primary-button class="w-full justify-center py-4 text-xl font-bold">
+                <x-primary-button class="w-full justify-center py-5 text-2xl font-bold">
                     {{ __('Iniciar sessió') }}
                 </x-primary-button>
             </div>

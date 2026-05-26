@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId("zone_id");
             $table->foreignId("container_id");
             $table->foreignId("material_id");
-            $table->integer("wight");
-            $table->enum("movement", ["input", "output"]);
+            $table->integer("weight");
+            $table->enum("movement", ["entrada", "sortida"]);
             $table->timestamps();
         });
     }

@@ -17,7 +17,6 @@ class Materials extends Model
     }
 
     public function zones() {
-        return $this->belongsToMany(Zones::class);
+        return $this->belongsToMany(Zones::class, 'zones__materials', 'material_id', 'zone_id');
     }
 }
-
