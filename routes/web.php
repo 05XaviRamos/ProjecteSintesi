@@ -19,6 +19,10 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth'])
     ->name('dashboard');
 
+Route::get('/export-csv', [DashboardController::class, 'exportCsv'])
+    ->middleware(['auth'])
+    ->name('export.csv');
+
 Route::get('/statistics', [StatisticsController::class, 'index'])
     ->middleware(['auth'])
     ->name('statistics.index');

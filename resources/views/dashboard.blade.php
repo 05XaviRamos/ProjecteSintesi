@@ -10,6 +10,15 @@
 
     <div class="py-10">
         <div class="mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-end">
+                <a
+                    href="{{ route('export.csv') }}"
+                    class="inline-flex items-center rounded-2xl bg-emerald-700 px-5 py-3 text-sm font-black uppercase tracking-[0.14em] text-white shadow-lg shadow-emerald-900/20 transition hover:bg-emerald-800"
+                >
+                    Exportar CSV
+                </a>
+            </div>
+
             <section class="grid gap-5 lg:grid-cols-2">
                 <a
                     href="{{ route('users.index') }}"

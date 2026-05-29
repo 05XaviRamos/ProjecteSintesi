@@ -42,4 +42,38 @@ class DashboardController extends Controller
             'containerCount',
         ));
     }
+
+    public function exportCsv(): RedirectResponse|\Symfony\Component\HttpFoundation\StreamedResponse
+    {
+        if (! auth()->user()->is_admin) {
+            return redirect()->route('worker.zone-selector');
+        }
+
+        $records = Records::query()
+            ->with(['user', 'zone', 'container', 'material'])
+            ->latest()
+            ->get();
+
+        return response()->streamDownload(function () use ($records) {
+            $handle = fopen('php://output', 'w');
+
+            fputcsv($handle, ['Usuari', 'Pes', 'Moviment', 'Material', 'Contenidor', 'Zona', 'Data']);
+
+            foreach ($records as $record) {
+                fputcsv($handle, [
+                    $record->user?->name ?? '-',
+                    $record->weight ?? 0,
+                    $record->movement ?? '-',
+                    $record->material?->name ?? '-',
+                    $record->container?->name ?? '-',
+                    $record->zone?->name ?? $record->zone?->nom ?? '-',
+                    $record->created_at?->format('d/m/Y H:i') ?? '-',
+                ]);
+            }
+
+            fclose($handle);
+        }, 'registres.csv', [
+            'Content-Type' => 'text/csv',
+        ]);
+    }
 }
