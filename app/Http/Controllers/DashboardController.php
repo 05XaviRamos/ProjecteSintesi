@@ -12,7 +12,9 @@ use Illuminate\View\View;
 class DashboardController extends Controller
 {
     /**
-     * Display the admin dashboard.
+     * Mostra el panell d'administració.
+     *
+     * @return View|RedirectResponse
      */
     public function index(): View|RedirectResponse
     {
@@ -43,6 +45,11 @@ class DashboardController extends Controller
         ));
     }
 
+    /**
+     * Exporta els registres a CSV.
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\StreamedResponse
+     */
     public function exportCsv(): RedirectResponse|\Symfony\Component\HttpFoundation\StreamedResponse
     {
         if (! auth()->user()->is_admin) {

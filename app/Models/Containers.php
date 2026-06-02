@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Model de contenidors.
+ */
 class Containers extends Model
 {
     /** @use HasFactory<\Database\Factories\ContainersFactory> */
@@ -12,11 +15,23 @@ class Containers extends Model
 
     protected $fillable = ['name', 'weight', 'input', 'output'];
 
-    public function records() {
+    /**
+     * Registres relacionats amb el contenidor.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function records()
+    {
         return $this->hasMany(Records::class);
     }
 
-    public function zones() {
+    /**
+     * Zones on es pot usar el contenidor.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function zones()
+    {
         return $this->belongsToMany(Zones::class, 'zones__containers', 'container_id', 'zone_id');
     }
 }

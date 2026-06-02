@@ -14,6 +14,12 @@ use Illuminate\View\View;
 
 class StatisticsController extends Controller
 {
+    /**
+     * Mostra les estadístiques amb filtres.
+     *
+     * @param Request $request
+     * @return View|RedirectResponse
+     */
     public function index(Request $request): View|RedirectResponse
     {
         if (! auth()->user()->is_admin) {

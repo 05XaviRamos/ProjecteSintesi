@@ -10,6 +10,11 @@ use Illuminate\View\View;
 
 class ContainerController extends Controller
 {
+    /**
+     * Mostra la gestió de contenidors.
+     *
+     * @return View|RedirectResponse
+     */
     public function index(): View|RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -21,6 +26,11 @@ class ContainerController extends Controller
         return view('admin.containers.container-management', compact('containers'));
     }
 
+    /**
+     * Mostra el formulari de creació de contenidors.
+     *
+     * @return View|RedirectResponse
+     */
     public function create(): View|RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -32,6 +42,12 @@ class ContainerController extends Controller
         return view('admin.containers.create', compact('zones'));
     }
 
+    /**
+     * Desa un contenidor nou.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function store(Request $request): RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -59,6 +75,12 @@ class ContainerController extends Controller
         return redirect()->route('containers.index')->with('success', 'Contenidor creat correctament.');
     }
 
+    /**
+     * Mostra el formulari d'edició d'un contenidor.
+     *
+     * @param Containers $container
+     * @return View|RedirectResponse
+     */
     public function edit(Containers $container): View|RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -71,6 +93,13 @@ class ContainerController extends Controller
         return view('admin.containers.edit', compact('container', 'zones'));
     }
 
+    /**
+     * Actualitza un contenidor.
+     *
+     * @param Request $request
+     * @param Containers $container
+     * @return RedirectResponse
+     */
     public function update(Request $request, Containers $container): RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -98,6 +127,12 @@ class ContainerController extends Controller
         return redirect()->route('containers.index')->with('success', 'Contenidor actualitzat correctament.');
     }
 
+    /**
+     * Elimina un contenidor.
+     *
+     * @param Containers $container
+     * @return RedirectResponse
+     */
     public function destroy(Containers $container): RedirectResponse
     {
         if (! auth()->user()->is_admin) {

@@ -11,6 +11,11 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
+    /**
+     * Mostra la llista d'usuaris.
+     *
+     * @return View|RedirectResponse
+     */
     public function index(): View|RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -22,6 +27,11 @@ class UserController extends Controller
         return view('admin.users.user-management', compact('users'));
     }
 
+    /**
+     * Mostra el formulari de creació d'usuaris.
+     *
+     * @return View|RedirectResponse
+     */
     public function create(): View|RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -31,6 +41,12 @@ class UserController extends Controller
         return view('admin.users.create');
     }
 
+    /**
+     * Desa un usuari nou.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function store(Request $request): RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -54,6 +70,12 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'Usuari creat correctament.');
     }
 
+    /**
+     * Mostra el formulari d'edició d'un usuari.
+     *
+     * @param User $user
+     * @return View|RedirectResponse
+     */
     public function edit(User $user): View|RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -63,6 +85,13 @@ class UserController extends Controller
         return view('admin.users.edit', compact('user'));
     }
 
+    /**
+     * Actualitza les dades d'un usuari.
+     *
+     * @param Request $request
+     * @param User $user
+     * @return RedirectResponse
+     */
     public function update(Request $request, User $user): RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -91,6 +120,12 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'Usuari actualitzat correctament.');
     }
 
+    /**
+     * Elimina un usuari.
+     *
+     * @param User $user
+     * @return RedirectResponse
+     */
     public function destroy(User $user): RedirectResponse
     {
         if (! auth()->user()->is_admin) {

@@ -9,6 +9,11 @@ use Illuminate\View\View;
 
 class ZoneController extends Controller
 {
+    /**
+     * Mostra el selector de zones per al treballador.
+     *
+     * @return View|RedirectResponse
+     */
     public function selector(): View|RedirectResponse
     {
         if (auth()->user()->is_admin) {
@@ -20,6 +25,11 @@ class ZoneController extends Controller
         return view('worker.zone-selector', compact('zones'));
     }
 
+    /**
+     * Mostra la gestió de zones.
+     *
+     * @return View|RedirectResponse
+     */
     public function index(): View|RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -31,6 +41,11 @@ class ZoneController extends Controller
         return view('admin.zones.zone-management', compact('zones'));
     }
 
+    /**
+     * Mostra el formulari de creació de zones.
+     *
+     * @return View|RedirectResponse
+     */
     public function create(): View|RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -40,6 +55,12 @@ class ZoneController extends Controller
         return view('admin.zones.create');
     }
 
+    /**
+     * Desa una zona nova.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function store(Request $request): RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -55,6 +76,12 @@ class ZoneController extends Controller
         return redirect()->route('zones.index')->with('success', 'Zona creada correctament.');
     }
 
+    /**
+     * Mostra el formulari d'edició d'una zona.
+     *
+     * @param Zones $zone
+     * @return View|RedirectResponse
+     */
     public function edit(Zones $zone): View|RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -64,6 +91,13 @@ class ZoneController extends Controller
         return view('admin.zones.edit', compact('zone'));
     }
 
+    /**
+     * Actualitza una zona.
+     *
+     * @param Request $request
+     * @param Zones $zone
+     * @return RedirectResponse
+     */
     public function update(Request $request, Zones $zone): RedirectResponse
     {
         if (! auth()->user()->is_admin) {
@@ -79,6 +113,12 @@ class ZoneController extends Controller
         return redirect()->route('zones.index')->with('success', 'Zona actualitzada correctament.');
     }
 
+    /**
+     * Elimina una zona.
+     *
+     * @param Zones $zone
+     * @return RedirectResponse
+     */
     public function destroy(Zones $zone): RedirectResponse
     {
         if (! auth()->user()->is_admin) {

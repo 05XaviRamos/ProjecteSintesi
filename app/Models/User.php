@@ -12,6 +12,9 @@ use Illuminate\Notifications\Notifiable;
 
 #[Fillable(['name', 'email', 'password', 'is_admin'])]
 #[Hidden(['password', 'remember_token'])]
+/**
+ * Model d'usuari.
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
@@ -29,7 +32,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function records() {
+    /**
+     * Registres fets per l'usuari.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function records()
+    {
         return $this->hasMany(Records::class);
     }
 }

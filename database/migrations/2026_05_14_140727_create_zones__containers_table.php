@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Crea la taula pivot de zones i contenidors.
      */
     public function up(): void
     {
@@ -20,7 +20,7 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Elimina la taula pivot de zones i contenidors.
      */
     public function down(): void
     {

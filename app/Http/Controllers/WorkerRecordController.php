@@ -12,7 +12,11 @@ use Illuminate\View\View;
 class WorkerRecordController extends Controller
 {
     /**
-     * Display the worker send-record screen.
+     * Mostra el formulari de registre del treballador.
+     *
+     * @param Request $request
+     * @param int|null $zone
+     * @return View|RedirectResponse
      */
     public function create(Request $request, ?int $zone = null): View|RedirectResponse
     {
@@ -42,7 +46,10 @@ class WorkerRecordController extends Controller
     }
 
     /**
-     * Store a newly created worker record.
+     * Desa un registre nou del treballador.
+     *
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
     {
